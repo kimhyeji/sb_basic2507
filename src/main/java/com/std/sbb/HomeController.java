@@ -52,4 +52,46 @@ public class HomeController {
     ) {
         return a + b;
     }
+
+    @GetMapping("/home/minus")
+    @ResponseBody
+    public int minus(
+            @RequestParam(value = "a", defaultValue = "0") int a,
+            @RequestParam(value = "b", defaultValue = "0") int b
+    ) {
+        return a - b;
+    }
+
+    @GetMapping("/home/multiply")
+    @ResponseBody
+    public int multiply(
+            @RequestParam(value = "a", defaultValue = "0") int a,
+            @RequestParam(value = "b", defaultValue = "0") int b
+    ) {
+        return a * b;
+    }
+
+    @GetMapping("/home/divide")
+    @ResponseBody
+    public int divide(
+            @RequestParam(value = "a", defaultValue = "0") int a,
+            @RequestParam(value = "b", defaultValue = "0") int b
+    ) {
+        return a / b;
+    }
+
+    @GetMapping("/home/calc")
+    @ResponseBody
+    public int calc(
+            @RequestParam(value = "a", defaultValue = "0") int a,
+            @RequestParam(value = "b", defaultValue = "0") int b,
+            @RequestParam(value = "c") String c
+    ) {
+        if ( c.equals("pl") ) return a + b;
+        if ( c.equals("mi") ) return a - b;
+        if ( c.equals("di") ) return a / b;
+        if ( c.equals("mu") ) return a * b;
+
+        return -1;
+    }
 }
