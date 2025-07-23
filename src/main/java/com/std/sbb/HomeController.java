@@ -2,6 +2,7 @@ package com.std.sbb;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 // @Controller의 의미
@@ -41,5 +42,14 @@ public class HomeController {
     public int showIncrease() {
         number++;
         return number;
+    }
+
+    @GetMapping("/home/plus")
+    @ResponseBody
+    public int plus(
+            @RequestParam(value = "a", defaultValue = "0") int a,
+            @RequestParam(value = "b", defaultValue = "0") int b
+    ) {
+        return a + b;
     }
 }
