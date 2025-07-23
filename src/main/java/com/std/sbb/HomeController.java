@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 // 아래에 있는 HomeController 는 컨트롤러이다.
 @Controller
 public class HomeController {
+    private int number;
+
+    HomeController() {
+         number = -1;
+    }
 
     // @GetMapping("/home/main")의 의미
     // 개발자가 스프링부트에게 말한다.
@@ -17,5 +22,24 @@ public class HomeController {
     @ResponseBody
     public String ShowMain() {
         return "안녕하세요.";
+    }
+
+    @GetMapping("/home/main2")
+    @ResponseBody
+    public String ShowMain2() {
+        return "반갑습니다.";
+    }
+
+    @GetMapping("/home/main3")
+    @ResponseBody
+    public String ShowMain3() {
+        return "즐거웠습니다.";
+    }
+
+    @GetMapping("/home/increase")
+    @ResponseBody
+    public int showIncrease() {
+        number++;
+        return number;
     }
 }
