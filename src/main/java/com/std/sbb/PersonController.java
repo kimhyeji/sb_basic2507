@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PersonController {
@@ -67,6 +68,54 @@ public class PersonController {
         }
 
         return id + "번 사람이 삭제되었습니다.";
+    }
+
+    @GetMapping("/person/modify")
+    @ResponseBody
+    public String modifyPerson(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("age") int age)
+    {
+        Person foundPerson = null;
+
+        for(Person person : people) {
+            if (person.getId() == id) {
+                foundPerson = person;
+            }
+        }
+
+        if ( foundPerson == null ) {
+            return id + "번 사람이 존재하지 않습니다.";
+        }
+
+        foundPerson.setAge(age);
+        foundPerson.setName(name);
+
+        return id + "번 사람이 수정되었습니다.";
+    }
+
+    @GetMapping("/person/modify2")
+    @ResponseBody
+    public String modifyPerson2(
+            @RequestParam("id") int id,
+            @RequestParam("name") String name,
+            @RequestParam("age") int age)
+    {
+        Person foundPerson = people
+                .stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if ( foundPerson == null ) {
+            return id + "번 사람이 존재하지 않습니다.";
+        }
+
+        foundPerson.setAge(age);
+        foundPerson.setName(name);
+
+        return id + "번 사람이 수정되었습니다.";
     }
 }
 
